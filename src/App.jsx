@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header } from "./layout/Header";
 import { Footer } from './layout/Footer';
-import { Main } from './layout/Main';
+import { MainContainer } from './layout/MainContainer';
 
 class App extends React.Component {
   state = {
@@ -10,7 +10,7 @@ class App extends React.Component {
     return(
       <>
         <Header />
-        <Main />
+        <MainContainer />
         <Footer />
       </>
     )
