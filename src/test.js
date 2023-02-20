@@ -32,3 +32,16 @@ str1 = str1.match(reg, '').join('');
 console.log(str1);
 
 
+const itemsInCart = [
+  { product: 'Носки', quantity: 3 },
+  { product: 'Штаны', quantity: 1 },
+  { product: 'Кепка', quantity: 1 },
+]
+
+const clonedCart = [...itemsInCart]
+
+console.log(clonedCart);
+
+console.log('5' - 3);
+console.log('5' + 3);
+console.log('5' + - 2);
