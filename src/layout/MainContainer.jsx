@@ -27,7 +27,7 @@ class MainContainer extends React.Component {
     }
 
     updateCards = () => {
-        const url = 'http://www.omdbapi.com/?' + this.getUrlParams();
+        const url = 'https://www.omdbapi.com/?' + this.getUrlParams();
         fetch(url)
             .then(response => response.json())
             .then(data => this.setState({ cards: data.Search }))

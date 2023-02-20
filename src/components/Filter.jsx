@@ -1,27 +1,52 @@
+import React, { useState } from 'react';
+
 function Filter(props) {
-    const {changeFilter} = props;
+	const [indFilter, setIndFilter] = useState(1);
+	const changeFilter = props.changeFilter;
 
-    const handleChange = (event) =>{
-        changeFilter(event.target.id);
-    }
+	const handleChange = (id) => {
+		setIndFilter(id);
+		//changeFilter(indFilter);
+	};
 
-    return (
-        <div>
-            <label>
-                <input id='1' name="group1" type="radio" checked onChange={handleChange}/>
-                <span>Все</span>
-            </label>
-            <label>
-                <input id='2' name="group1" type="radio"  onChange={handleChange}/>
-                <span>Фильмы</span>
-            </label>
-            <label>
-                {/* <input class="with-gap" name="group1" type="radio" /> */}
-                <input id='3' name="group1" type="radio"  onChange={handleChange}/>
-                <span>Сериалы</span>
-            </label>
-        </div>
-    )
+	return (
+		<div>
+			<label>
+				<input
+					id='1'
+                    className='with-gap'
+					name='group1'
+					type='radio'
+					onChange={handleChange(1)}
+					checked = {indFilter === 1}
+				/>
+				<span>Все</span>
+			</label>
+			<label>
+				<input
+					id='2'
+                    className='with-gap'
+					name='group1'
+					type='radio'
+					onChange={handleChange(2)}
+                    checked={indFilter===2}
+				/>
+				<span>Фильмы</span>
+			</label>
+			<label>
+				{/* <input class="with-gap" name="group1" type="radio" /> */}
+				<input
+					id='3'
+                    className='with-gap'
+					name='group1'
+					type='radio'
+					onChange={handleChange(3)}
+					checked={indFilter === 3}
+				/>
+				<span>Сериалы</span>
+			</label>
+		</div>
+	);
 }
 
-export { Filter }
+export { Filter };

@@ -45,3 +45,32 @@ console.log(clonedCart);
 console.log('5' - 3);
 console.log('5' + 3);
 console.log('5' + - 2);
+
+async function getData() {
+  return await Promise.resolve("I made it!");
+  }
+  
+  const data = getData();
+  console. log(data);
+  
+   
+  export const App = () => {
+    useEffect(() => {
+    const allwithClass = Array. from(
+    document .getElementsByClassName( ‘example’
+    );
+    console. log(altWithClass);
+    }, 1);
+    return (
+    <div>
+    <div>
+    <h2 className="example">Alice</h2>
+    <h2 className="example">Bob</h2>
+    <h2 className="example">Carl</h2>
+    </div>
+    </div>
+    
+     
+    
+     
+      
