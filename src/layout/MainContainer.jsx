@@ -8,6 +8,7 @@ import { Filter } from '../components/Filter';
 class MainContainer extends React.Component {
     state = {
         cards: [],
+        loading: true
     }
 
     search = '';
@@ -18,19 +19,20 @@ class MainContainer extends React.Component {
         let params =`apikey=${this.API_KEY}`;
         if (this.search !== '')
             params = `${params}&s=${this.search}`;
-        if (this.filterIndex === 1)
-            params = `${params}&type=movie`;
         if (this.filterIndex === 2)
+            params = `${params}&type=movie`;
+        if (this.filterIndex === 3)
             params = `${params}&type=series`;
         params = params + '&page=1';
         return params;
     }
 
     updateCards = () => {
+        this.setState({loading: true});
         const url = 'https://www.omdbapi.com/?' + this.getUrlParams();
         fetch(url)
             .then(response => response.json())
-            .then(data => this.setState({ cards: data.Search }))
+            .then(data => this.setState({ cards: data.Search, loading: false }))
     }
     
     searchCards = (text) => {
@@ -56,12 +58,12 @@ class MainContainer extends React.Component {
 
     render() {
 
-        const { cards } = this.state
+        const { cards, loading } = this.state
         return (
             <main className="content container">
                 <Search searchCards={this.searchCards} />
                 <Filter changeFilter={this.changeFilter} />
-                {Array.isArray(cards) && cards.length ? (<Cards cards={this.state.cards} />) : this.search > 0 ? <Preloader /> : ''}
+                {loading ? this.search.length > 0 ? <Preloader /> : '' : (<Cards cards={cards} />)}
                 {/* {cards.length ? (<Cards cards={this.state.cards} />) : this.search > 0 ? <Preloader /> : ''} */}
             </main>)
     }

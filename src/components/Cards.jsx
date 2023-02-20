@@ -20,9 +20,10 @@ class Cards extends React.Component {
     render() {
         console.log('render');
         console.log(this.state.cards);
+        let cards = this.state.cards ? this.state.cards : [];
         return (
             <div className='cards'> 
-                {this.props.cards.map(card => {
+                {cards.map(card => {
                          return <Card key={card.imdbID} card={card} {...card} /> })}
             </div>);
     }

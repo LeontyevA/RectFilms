@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../index.css';
 
 function Filter(props) {
 	const [indFilter, setIndFilter] = useState(1);
@@ -6,7 +7,7 @@ function Filter(props) {
 
 	const handleChange = (id) => {
 		setIndFilter(id);
-		//changeFilter(indFilter);
+		changeFilter(id);
 	};
 
 	return (
@@ -15,9 +16,9 @@ function Filter(props) {
 				<input
 					id='1'
                     className='with-gap'
-					name='group1'
+					name='type'
 					type='radio'
-					onChange={handleChange(1)}
+					onChange={() => handleChange(1)}
 					checked = {indFilter === 1}
 				/>
 				<span>Все</span>
@@ -26,9 +27,9 @@ function Filter(props) {
 				<input
 					id='2'
                     className='with-gap'
-					name='group1'
+					name='type'
 					type='radio'
-					onChange={handleChange(2)}
+					onChange={() => handleChange(2)}
                     checked={indFilter===2}
 				/>
 				<span>Фильмы</span>
@@ -38,9 +39,9 @@ function Filter(props) {
 				<input
 					id='3'
                     className='with-gap'
-					name='group1'
+					name='type'
 					type='radio'
-					onChange={handleChange(3)}
+					onChange={() => handleChange(3)}
 					checked={indFilter === 3}
 				/>
 				<span>Сериалы</span>

@@ -8,7 +8,7 @@ console.log(guest);
 console.log(guest1);
 
 
-const numbers = [1,2,3,4,5,6,7,8];
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
 let odds = numbers.filter(num => num !== 0);
 
 console.log(odds);
@@ -16,12 +16,12 @@ console.log(odds);
 let str = `Hello`;
 
 // получаем первый символ
-console.log( str[0] ); // H
-console.log( str.at(0) ); // H
+console.log(str[0]); // H
+console.log(str.at(0)); // H
 
 // получаем последний символ
-console.log( str[str.length - 1] ); // o
-console.log( str.at(-4));
+console.log(str[str.length - 1]); // o
+console.log(str.at(-4));
 
 let str1 = `Строка, заменяющая подстроку из первого параметра. 
 Поддерживает несколько специальных шаблонов замены; 
@@ -48,29 +48,9 @@ console.log('5' + - 2);
 
 async function getData() {
   return await Promise.resolve("I made it!");
-  }
-  
-  const data = getData();
-  console. log(data);
-  
-   
-  export const App = () => {
-    useEffect(() => {
-    const allwithClass = Array. from(
-    document .getElementsByClassName( ‘example’
-    );
-    console. log(altWithClass);
-    }, 1);
-    return (
-    <div>
-    <div>
-    <h2 className="example">Alice</h2>
-    <h2 className="example">Bob</h2>
-    <h2 className="example">Carl</h2>
-    </div>
-    </div>
-    
-     
-    
-     
-      
+}
+
+const data = getData();
+console.log(data);
+
+
