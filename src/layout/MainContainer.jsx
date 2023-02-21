@@ -1,74 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import Cards from "../components/Cards"
+import Cards from '../components/Cards';
 import { Preloader } from '../components/Preloader';
 import Search from '../components/Search';
 import { Filter } from '../components/Filter';
 
-class MainContainer extends React.Component {
-    state = {
-        cards: [],
-        loading: true
-    }
+const MainContainer = () => {
+	const [cards, setCards] = useState([]);
+	const [loading, setLoading] = useState();
+	const [search, setSearch] = useState('');
+	const [filterIndex, setFilterIndex] = useState(1);
 
-    search = '';
-    filterIndex = 1;
-    API_KEY = process.env.REACT_APP_API_KEY;
+	const API_KEY = process.env.REACT_APP_API_KEY;
 
-    getUrlParams = () => {
-        let params =`apikey=${this.API_KEY}`;
-        if (this.search !== '')
-            params = `${params}&s=${this.search}`;
-        if (this.filterIndex === 2)
-            params = `${params}&type=movie`;
-        if (this.filterIndex === 3)
-            params = `${params}&type=series`;
-        params = params + '&page=1';
-        return params;
-    }
+	const getUrlParams = (s, f) => {
+		let params = `apikey=${API_KEY}`;
+		if (s !== '') params = `${params}&s=${s}`;
+		if (f === 2) params = `${params}&type=movie`;
+		if (f === 3) params = `${params}&type=series`;
+		params = params + '&page=1';
+		return params;
+	};
 
-    updateCards = () => {
-        this.setState({loading: true});
-        const url = 'https://www.omdbapi.com/?' + this.getUrlParams();
-        fetch(url)
-            .then(response => response.json())
-            .then(data => this.setState({ cards: data.Search, loading: false }))
-    }
-    
-    searchCards = (text) => {
-        console.log('searchCards');
+	const updateCards = (s, f) => {
+		setLoading(true);
+		const url = 'https://www.omdbapi.com/?' + getUrlParams(s, f);
+        console.log(url);
+		fetch(url)
+			.then((response) => response.json())
+			.then((data) => {
+				setCards(data.Search);
+				setLoading(false);
+			});
+	};
 
-        this.search = text;
-        this.updateCards();
-    }
+	const searchCards = (text) => {
+		console.log('searchCards: ' + text);
 
-    changeFilter = (index) => {
-        console.log('changeFilter');
+		setSearch(text);
+		updateCards(text, filterIndex);
+	};
 
-        this.filterIndex = +index;
-        this.updateCards();
-    }
+	const changeFilter = (index) => {
 
-    componentDidMount() {
-        console.log('componentDidMount');
-    }
+		setFilterIndex(+index);
+		console.log(`changeFilter ${filterIndex}`);
+		updateCards(search, +index);
+	};
 
-    componentDidUpdate() {
-    }
-
-    render() {
-
-        const { cards, loading } = this.state
-        return (
-            <main className="content container">
-                <Search searchCards={this.searchCards} />
-                <Filter changeFilter={this.changeFilter} />
-                {loading ? this.search.length > 0 ? <Preloader /> : '' : (<Cards cards={cards} />)}
-                {/* {cards.length ? (<Cards cards={this.state.cards} />) : this.search > 0 ? <Preloader /> : ''} */}
-            </main>)
-    }
-}
+	return (
+		<main className='content container'>
+			<Search searchCards={searchCards} />
+			<Filter changeFilter={changeFilter} />
+			{loading ? (
+				search.length > 0 ? (
+					<Preloader />
+				) : (
+					''
+				)
+			) : (
+				<Cards cards={cards} />
+			)}
+			{/* {cards.length ? (<Cards cards={this.state.cards} />) : this.search > 0 ? <Preloader /> : ''} */}
+		</main>
+	);
+};
 
 export { MainContainer };
-
-
